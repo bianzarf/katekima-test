@@ -13,7 +13,7 @@ export default defineComponent({
     },
     setup(props){
         const route = useRoute();
-        const isActive = computed(() => route.path === props.to);
+        const isActive = computed(() => route.path.includes(props.to));
         return { isActive, collapsed};
     },
     data(){

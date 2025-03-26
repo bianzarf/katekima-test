@@ -73,6 +73,11 @@ export default defineComponent({
         type: "edit",
         icon: "pi pi-pencil",
       },
+      {
+        label: "Delete",
+        type: "delete",
+        icon: "pi pi-pencil",
+      },
     ]);
 
     const curDt = moment(new Date()).format("YYYY-MM-DD");
@@ -92,8 +97,8 @@ export default defineComponent({
     };
   },
   methods: {
-    toggle(event, name) {
-      this.$refs["menu_" + name].toggle(event);
+    toggle(event, id) {
+      this.$refs["menu_" + id].toggle(event);
     },
     onAction(type: string, data: any) {
       if (type == "edit") {
@@ -206,22 +211,22 @@ export default defineComponent({
         >
           <template #body="slotProps">
             <Button
-              :id="slotProps.data.name"
+              :id="slotProps.data.id"
               type="button"
               icon="pi pi-ellipsis-v"
-              @click="toggle($event, slotProps.data.name)"
+              @click="toggle($event, slotProps.data.id)"
               aria-haspopup="true"
-              :aria-controls="`overlay_menu_` + slotProps.data.name"
+              :aria-controls="`overlay_menu_` + slotProps.data.id"
             />
             <Menu
-              :ref="'menu_' + slotProps.data.name"
-              :id="`overlay_menu_` + slotProps.data.name"
+              :ref="'menu_' + slotProps.data.id"
+              :id="`overlay_menu_` + slotProps.data.id"
               :model="items"
               :popup="true"
             >
               <template #item="{ item }">
                 <div
-                  :id="`pointer_` + slotProps.data.name"
+                  :id="`pointer_` + slotProps.data.id"
                   class="cursor-pointer p-2"
                   @click="onAction(item.type, slotProps.data)"
                 >
